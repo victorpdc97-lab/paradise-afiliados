@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Afiliado - Paradise</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      background: #fff;
+      border-bottom: 3px solid #1a1a1a;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .header-content {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .logo-icon {
+      width: 60px;
+      height: 60px;
+      background: #1a1a1a;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .brand-info h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-info p {
+      font-size: 13px;
+      color: #777;
+      margin-top: 2px;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .form-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+      padding: 40px;
+      width: 100%;
+      max-width: 620px;
+    }
+
+    .form-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 6px;
+    }
+
+    .form-group label .required {
+      color: #1a1a1a;
+      margin-left: 2px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: #333;
+      background: #fafafa;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #1a1a1a;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #bbb;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: #1a1a1a;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .checkbox-group label {
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .checkbox-group label a {
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .checkbox-group label a:hover {
+      text-decoration: underline;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 28px 0;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #aaa;
+      margin-bottom: 18px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: #333;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 24px 20px;
+      color: #aaa;
+      font-size: 12px;
+      border-top: 1px solid #eee;
+      background: #fff;
+    }
+
+    .footer a {
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Success message */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-overlay.active {
+      display: flex;
+    }
+
+    .success-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: #1a1a1a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .success-icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: #fff;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .success-box h2 {
+      font-size: 22px;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .success-box p {
+      color: #777;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Validation */
+    .form-group.error input,
+    .form-group.error select,
+    .form-group.error textarea {
+      border-color: #e53e3e;
+      background: #fff5f5;
+    }
+
+    .error-msg {
+      font-size: 12px;
+      color: #e53e3e;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .form-group.error .error-msg {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 28px 20px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .logo-area {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .brand-info {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-area">
+        <div class="logo-icon">P</div>
+        <div class="brand-info">
+          <h1>Paradise</h1>
+          <p>Programa de Afiliados &mdash; useparadise.com.br</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Form -->
+  <main class="main">
+    <div class="form-container">
+      <h2 class="form-title">Cadastro de Afiliado</h2>
+      <p class="form-subtitle">Preencha seus dados para se tornar um afiliado Paradise</p>
+
+      <form id="affiliateForm" onsubmit="return handleSubmit(event)">
+
+        <div class="section-label">Dados Pessoais</div>
+
+        <div class="form-group">
+          <label>Nome Completo ou Razão Social <span class="required">*</span></label>
+          <input type="text" name="nome" placeholder="Digite seu nome completo" required>
+          <span class="error-msg">Este campo é obrigatório</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>E-mail <span class="required">*</span></label>
+            <input type="email" name="email" id="email" placeholder="seu@email.com" required>
+            <span class="error-msg">Informe um e-mail válido</span>
+          </div>
+          <div class="form-group">
+            <label>Confirme o E-mail <span class="required">*</span></label>
+            <input type="email" id="emailConfirm" placeholder="Confirme seu e-mail" required>
+            <span class="error-msg">Os e-mails não coincidem</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>CPF <span class="required">*</span></label>
+            <input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" maxlength="14" required>
+            <span class="error-msg">Informe um CPF válido</span>
+          </div>
+          <div class="form-group">
+            <label>CNPJ <span class="optional" style="color:#aaa;font-weight:400;font-size:11px;">(opcional)</span></label>
+            <input type="text" name="cnpj" id="cnpj" placeholder="00.000.000/0000-00" maxlength="18">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Telefone / WhatsApp <span class="required">*</span></label>
+          <input type="tel" name="telefone" id="telefone" placeholder="(00) 00000-0000" maxlength="15" required>
+          <span class="error-msg">Informe um telefone válido</span>
+        </div>
+
+        <hr class="divider">
+        <div class="section-label">Sobre Você</div>
+
+        <div class="form-group">
+          <label>Como pretende divulgar? <span class="required">*</span></label>
+          <select name="canal_divulgacao" required>
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option value="Instagram">Instagram</option>
+            <option value="TikTok">TikTok</option>
+            <option value="YouTube">YouTube</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Blog / Site">Blog / Site</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="E-mail Marketing">E-mail Marketing</option>
+            <option value="Outro">Outro</option>
+          </select>
+          <span class="error-msg">Selecione uma opção</span>
+        </div>
+
+        <div class="form-group">
+          <label>Link do seu perfil ou site <span class="optional" style="color:#aaa;font-weight:400;font-size:11px;">(opcional)</span></label>
+          <input type="url" name="link_perfil" placeholder="https://instagram.com/seuperfil">
+        </div>
+
+        <div class="form-group">
+          <label>Mensagem adicional <span class="optional" style="color:#aaa;font-weight:400;font-size:11px;">(opcional)</span></label>
+          <textarea name="mensagem" placeholder="Conte-nos um pouco sobre você e por que deseja ser afiliado Paradise..."></textarea>
+        </div>
+
+        <hr class="divider">
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="termos" required>
+          <label for="termos">
+            Li e aceito os <a href="#" onclick="alert('Termos de uso do programa de afiliados Paradise. Entre em contato com sac@useparadise.com.br para mais informações.'); return false;">Termos de Uso</a> do programa de afiliados Paradise. <span class="required">*</span>
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="privacidade" required>
+          <label for="privacidade">
+            Concordo com a <a href="#" onclick="alert('Política de privacidade Paradise. Seus dados serão tratados conforme a LGPD.'); return false;">Política de Privacidade</a> e o tratamento dos meus dados conforme a LGPD. <span class="required">*</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnSubmit">Enviar Cadastro</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Success Overlay -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-box">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2>Cadastro Enviado!</h2>
+      <p>Recebemos seus dados com sucesso. Nossa equipe entrará em contato em breve pelo e-mail ou telefone informado.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 <a href="https://useparadise.com.br" target="_blank">Paradise</a> &mdash; Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // ===== Input Masks =====
+    function maskCPF(v) {
+      return v.replace(/\D/g, '')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    }
+
+    function maskCNPJ(v) {
+      return v.replace(/\D/g, '')
+        .replace(/(\d{2})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1/$2')
+        .replace(/(\d{4})(\d{1,2})$/, '$1-$2');
+    }
+
+    function maskPhone(v) {
+      v = v.replace(/\D/g, '');
+      if (v.length > 10) {
+        return v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+      }
+      return v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    }
+
+    document.getElementById('cpf').addEventListener('input', function () {
+      this.value = maskCPF(this.value);
+    });
+
+    document.getElementById('cnpj').addEventListener('input', function () {
+      this.value = maskCNPJ(this.value);
+    });
+
+    document.getElementById('telefone').addEventListener('input', function () {
+      this.value = maskPhone(this.value);
+    });
+
+    // ===== Email Confirmation Validation =====
+    const emailField = document.getElementById('email');
+    const emailConfirmField = document.getElementById('emailConfirm');
+
+    emailConfirmField.addEventListener('blur', function () {
+      const parent = this.closest('.form-group');
+      if (this.value && this.value !== emailField.value) {
+        parent.classList.add('error');
+      } else {
+        parent.classList.remove('error');
+      }
+    });
+
+    // ===== Form Submission via mailto =====
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      // Check email match
+      if (emailField.value !== emailConfirmField.value) {
+        emailConfirmField.closest('.form-group').classList.add('error');
+        emailConfirmField.focus();
+        return false;
+      }
+
+      // Check checkboxes
+      if (!document.getElementById('termos').checked || !document.getElementById('privacidade').checked) {
+        alert('Você precisa aceitar os Termos de Uso e a Política de Privacidade.');
+        return false;
+      }
+
+      const form = document.getElementById('affiliateForm');
+      const nome = form.querySelector('[name="nome"]').value;
+      const email = form.querySelector('#email').value;
+      const cpf = form.querySelector('[name="cpf"]').value;
+      const cnpj = form.querySelector('[name="cnpj"]').value;
+      const telefone = form.querySelector('[name="telefone"]').value;
+      const canal = form.querySelector('[name="canal_divulgacao"]').value;
+      const link = form.querySelector('[name="link_perfil"]').value;
+      const mensagem = form.querySelector('[name="mensagem"]').value;
+
+      const subject = encodeURIComponent('Novo Cadastro de Afiliado - Paradise');
+      const body = encodeURIComponent(
+        '=== CADASTRO DE AFILIADO PARADISE ===\n\n' +
+        'Nome: ' + nome + '\n' +
+        'E-mail: ' + email + '\n' +
+        'CPF: ' + cpf + '\n' +
+        'CNPJ: ' + (cnpj || 'Não informado') + '\n' +
+        'Telefone/WhatsApp: ' + telefone + '\n' +
+        'Canal de Divulgação: ' + canal + '\n' +
+        'Link do Perfil/Site: ' + (link || 'Não informado') + '\n' +
+        'Mensagem: ' + (mensagem || 'Nenhuma') + '\n\n' +
+        '======================================\n' +
+        'Aceite dos Termos de Uso: Sim\n' +
+        'Aceite da Política de Privacidade: Sim\n'
+      );
+
+      window.location.href = 'mailto:sac@useparadise.com.br?subject=' + subject + '&body=' + body;
+      return false;
+    }
+  </script>
+</body>
+</html>
