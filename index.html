@@ -385,7 +385,12 @@
       <h2 class="form-title">Cadastro de Afiliado</h2>
       <p class="form-subtitle">Preencha seus dados para se tornar um afiliado Paradise</p>
 
-      <form id="affiliateForm" onsubmit="return handleSubmit(event)">
+      <form id="affiliateForm" action="https://formsubmit.co/sac@useparadise.com.br" method="POST">
+        <input type="hidden" name="_subject" value="Novo Cadastro de Afiliado - Paradise">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://afiliados.useparadise.com.br/?enviado=1">
+        <input type="text" name="_honey" style="display:none">
 
         <div class="section-label">Dados Pessoais</div>
 
@@ -542,51 +547,31 @@
       }
     });
 
-    // ===== Form Submission via mailto =====
-    function handleSubmit(e) {
-      e.preventDefault();
+    // ===== Form Submission =====
+    const form = document.getElementById('affiliateForm');
+    const btn = document.getElementById('btnSubmit');
 
-      // Check email match
+    form.addEventListener('submit', function (e) {
       if (emailField.value !== emailConfirmField.value) {
+        e.preventDefault();
         emailConfirmField.closest('.form-group').classList.add('error');
         emailConfirmField.focus();
-        return false;
+        return;
       }
 
-      // Check checkboxes
       if (!document.getElementById('termos').checked || !document.getElementById('privacidade').checked) {
+        e.preventDefault();
         alert('Você precisa aceitar os Termos de Uso e a Política de Privacidade.');
-        return false;
+        return;
       }
 
-      const form = document.getElementById('affiliateForm');
-      const nome = form.querySelector('[name="nome"]').value;
-      const email = form.querySelector('#email').value;
-      const cpf = form.querySelector('[name="cpf"]').value;
-      const cnpj = form.querySelector('[name="cnpj"]').value;
-      const telefone = form.querySelector('[name="telefone"]').value;
-      const canal = form.querySelector('[name="canal_divulgacao"]').value;
-      const link = form.querySelector('[name="link_perfil"]').value;
-      const mensagem = form.querySelector('[name="mensagem"]').value;
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+    });
 
-      const subject = encodeURIComponent('Novo Cadastro de Afiliado - Paradise');
-      const body = encodeURIComponent(
-        '=== CADASTRO DE AFILIADO PARADISE ===\n\n' +
-        'Nome: ' + nome + '\n' +
-        'E-mail: ' + email + '\n' +
-        'CPF: ' + cpf + '\n' +
-        'CNPJ: ' + (cnpj || 'Não informado') + '\n' +
-        'Telefone/WhatsApp: ' + telefone + '\n' +
-        'Canal de Divulgação: ' + canal + '\n' +
-        'Link do Perfil/Site: ' + (link || 'Não informado') + '\n' +
-        'Mensagem: ' + (mensagem || 'Nenhuma') + '\n\n' +
-        '======================================\n' +
-        'Aceite dos Termos de Uso: Sim\n' +
-        'Aceite da Política de Privacidade: Sim\n'
-      );
-
-      window.location.href = 'mailto:sac@useparadise.com.br?subject=' + subject + '&body=' + body;
-      return false;
+    // Show success if redirected back
+    if (window.location.search.includes('enviado=1')) {
+      document.getElementById('successOverlay').classList.add('active');
     }
   </script>
 </body>
